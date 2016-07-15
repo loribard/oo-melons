@@ -19,15 +19,27 @@ class AbstractMelonOrder(object):
 
         if self.order_type == 'international' and self.qty < 10:
             total += 3
-            
+
         return total
 
     def mark_shipped(self):
         """Set shipped to true."""
 
         self.shipped = True
+       
+
+class GovernmentMelonOrder(AbstractMelonOrder):
+    """docstring for GovernmentMelonOrder"""
+    passed_inspection = False
+
+    def __init__(self, species, qty):
+        super(GovernmentMelonOrder, self).__init__(species, qty, "government", 0.0)
         
 
+    def mark_inspection(self):
+        self.passed_inspection = True
+
+        
 class DomesticMelonOrder(AbstractMelonOrder):
     """A domestic (in the US) melon order."""
 
